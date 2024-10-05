@@ -1,0 +1,4 @@
+1. height of a tree https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+2. diameter of a tree
+3. balanced trees https://leetcode.com/problems/balanced-binary-tree/description/
+4. lowest comman ancestor of a tree  https://leetcode.com/problems/path-sum/
