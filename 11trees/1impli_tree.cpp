@@ -128,7 +128,7 @@ void Level_ordered_traversal(node *n1){
         }
     }
 }
-
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // implementing an tree from preorder and in order traversal also implementing an tree from preorder and in order traversal
 int find_index(int inorder[],int size,int target){
     for(int i=0;i<size;i++){
@@ -186,7 +186,7 @@ node* create_tree_from_inorder_postorder(int postorder[],int inorder[],int inord
 int main(){
 
     // node *n1=create_tree();
-    // cout<<n1->data;
+    // cout<<n1->data;    3 4 2 -1 -1 5 -1 -1 1 7 -1 -1 9 -1 -1
 
     // print_inorder_traversal(n1);
     // print_preorder_traversal(n1);
