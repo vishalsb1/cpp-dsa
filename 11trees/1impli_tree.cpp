@@ -262,10 +262,46 @@ void print_topview(node *n1 )
 
        node* frontnd=temp.first;
        int hd=temp.second;
-
+    
+    // its bascally helps in finding an elemnt.first if already occupied , if occupied then does nothing if not occupied then pushes the element accoring the vertical distnce(hd)
        if(hd_to_node.find(hd)==hd_to_node.end()){
             hd_to_node[hd]=frontnd->data;
        }
+
+        //    atta same left la jaycha nanter rigth
+
+        if(frontnd->left !=NULL){
+            q.push(make_pair(frontnd->left,hd-1));
+        }
+        if(frontnd->right !=NULL){
+            q.push(make_pair(frontnd->right,hd+1));
+        }
+
+    }
+
+    for(auto i : hd_to_node){
+        cout<<i.second<<" ";
+    }
+    
+}
+void print_bottomview(node *n1 )
+{   
+    map<int ,int > hd_to_node;
+    queue<pair<node*,int>> q;
+    q.push(make_pair(n1,0));
+
+    while (!q.empty())
+    {
+       pair<node*,int> temp=q.front();
+       q.pop();
+
+       node* frontnd=temp.first;
+       int hd=temp.second;
+    
+    // its bascally helps in finding an elemnt.first if already occupied , if occupied then does nothing if not occupied then pushes the element accoring the vertical distnce(hd)
+       
+       hd_to_node[hd]=frontnd->data;
+       
 
         //    atta same left la jaycha nanter rigth
 
@@ -369,7 +405,15 @@ int main(){
 // 10
 // -1
 // -1
-    print_topview(n1);  
+    // print_topview(n1);  
+
+
+
+    // the buttom view
+    // print_bottomview(n1);
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
