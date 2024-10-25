@@ -245,8 +245,11 @@ void print_rightview(node *root,int level,vector<int> &rightview){
 
         print_rightview(root->right,level+1,rightview);
         print_rightview(root->left,level+1,rightview);
+
     }
 
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
 // the implimentation of top viewof a tree 
 
 void print_topview(node *n1 )
@@ -319,6 +322,74 @@ void print_bottomview(node *n1 )
     }
     
 }
+// -------------------------------------------------------------------------------------------------------------------------------------------
+//   the three steps to print the boundaries
+
+void left_boundary(node *n1){
+    if(n1==NULL){
+        return;
+    }
+    if(n1->left==NULL && n1->right==NULL){
+        return;
+    }
+
+    cout<<n1->data <<" ";
+    // jar left la nasat branch ter right la ja
+    if(n1->left!=NULL){
+        left_boundary(n1->left);
+    }else{
+        left_boundary(n1->right);
+    }
+}
+// 2
+// the leaf 
+void leaf_boundary(node *n1){
+    if(n1==NULL){
+        return;
+    }
+    if(n1->left==NULL && n1->right==NULL){
+        cout<<n1->data<<" ";
+    }
+
+    // nahetar
+    leaf_boundary(n1->left);
+    leaf_boundary(n1->right);
+
+}
+// 3
+// the boundar of right
+void right_boundary(node *n1){
+    if(n1==NULL){
+        return;
+    }
+    if(n1->left==NULL && n1->right==NULL){
+        return;
+    }
+
+    // jar left la nasat branch ter right la ja
+    if(n1->left!=NULL){
+        right_boundary(n1->left);
+    }else{
+        right_boundary(n1->right);
+    }
+    cout<<n1->data<<" ";
+}
+
+// the main part the over all boundary of a tree 
+void boundary_tree(node *n1){
+    if(n1==NULL){
+        return ;
+    }
+    left_boundary(n1);
+    leaf_boundary(n1);
+    if(n1->right!=NULL){
+        right_boundary(n1->right);
+    }
+    else{
+        right_boundary(n1->left);  
+    }
+}
+
 int main(){
 
     node *n1=create_tree();
@@ -413,7 +484,8 @@ int main(){
     // print_bottomview(n1);
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
-
+// printing the boundary
+boundary_tree(n1);
 
 
 
