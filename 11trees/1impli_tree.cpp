@@ -183,10 +183,58 @@ node* create_tree_from_inorder_postorder(int postorder[],int inorder[],int inord
 
     return root_node;
 }
+
+void print_leftview(node *root,int level,vector<int> &leftview){
+    if(root==NULL){
+        return ;
+    }
+
+    if(level==leftview.size()){
+        leftview.push_back(root->data);
+    }
+
+    // atta left ani right cha vishay
+
+    print_leftview(root->left,level+1,leftview);
+    print_leftview(root->right,level+1,leftview);
+}
+
+void print_leftview_ii(node *n1 , vector<int> &leftview){
+    queue<int> q;
+    q.push(n1);
+    q.push(NULL);
+
+    vector<int> temp;
+    while(!q.empty()){
+
+        node * temp = q.front();
+
+        q.pop();
+
+        if(root==NULL){
+            // cout<<endl;
+            leftview.push_back(temp.at(0));
+            delete temp;
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        else{
+
+            // cout root cha data;
+            temp.push_back(root->data);
+            // att left la 
+            print_leftview_ii(root->left,leftview);
+            // att right la 
+            print_leftview_ii(root->right,leftview);
+        }
+
+    }
+}
 int main(){
 
-    // node *n1=create_tree();
-    // cout<<n1->data;    3 4 2 -1 -1 5 -1 -1 1 7 -1 -1 9 -1 -1
+    node *n1=create_tree();
+    // cout<<n1->data;    //3 4 2 -1 -1 5 -1 -1 1 7 -1 -1 9 -1 -1
 
     // print_inorder_traversal(n1);
     // print_preorder_traversal(n1);
@@ -211,18 +259,35 @@ int main(){
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
     // implementing an tree from postorder and in order traversal 
 
-    int postorder[]={10,6,8,12,4,2};
-    int inorder[]={10,8,6,2,4,12};
-    int inorderstart=0;
-    int inorderend=5;
-    int size=6;
-    int postorderIndex=size-1;
+    // int postorder[]={10,6,8,12,4,2};
+    // int inorder[]={10,8,6,2,4,12};
+    // int inorderstart=0;
+    // int inorderend=5;
+    // int size=6;
+    // int postorderIndex=size-1;
 
-    node* node1=create_tree_from_inorder_postorder(postorder,inorder,inorderstart,inorderend,postorderIndex,size);
-
-
-    Level_ordered_traversal(node1);
+    // node* node1=create_tree_from_inorder_postorder(postorder,inorder,inorderstart,inorderend,postorderIndex,size);
 
 
+    // Level_ordered_traversal(node1);
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // the printing of left view 
+
+    // method i
+    // vector<int> leftview;
+    // print_leftview(n1,0,leftview);
+
+    // for(auto i : leftview){
+    //     cout<<(i)<<" ";
+    // }
+
+    // method ii
+    vector<int> leftview;
+    print_leftview_ii(n1,leftview);
+
+    for(auto i : leftview){
+        cout<<(i)<<" ";
+    }
     return 0;
 }
