@@ -376,7 +376,7 @@ void right_boundary(node *n1){
 }
 
 // the main part the over all boundary of a tree 
-void boundary_tree(node *n1){
+void boundary_traversal(node *n1){
     if(n1==NULL){
         return ;
     }
@@ -485,7 +485,7 @@ int main(){
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // printing the boundary
-boundary_tree(n1);
+boundary_traversal(n1);
 
 
 
