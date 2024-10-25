@@ -6,4 +6,7 @@
 6. pathsum II
 7. K-th ancestor from the target node 
 8.implementing an tree from preorder and in order traversal
-8.implementing an tree from postorder and in order traversal
+9.implementing an tree from postorder and in order traversal
+10.the left view by two methods 
+11.the right view of a tree
+13.the top view of the tree

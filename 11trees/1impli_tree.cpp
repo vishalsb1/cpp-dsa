@@ -1,5 +1,5 @@
-#include<iostream>
-#include<queue>
+// #include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
 class node{
 
@@ -198,9 +198,10 @@ void print_leftview(node *root,int level,vector<int> &leftview){
     print_leftview(root->left,level+1,leftview);
     print_leftview(root->right,level+1,leftview);
 }
-
+/*
 void print_leftview_ii(node *n1 , vector<int> &leftview){
     queue<int> q;
+
     q.push(n1);
     q.push(NULL);
 
@@ -222,14 +223,65 @@ void print_leftview_ii(node *n1 , vector<int> &leftview){
         else{
 
             // cout root cha data;
-            temp.push_back(root->data);
+            temp.push_back((root->data));
             // att left la 
             print_leftview_ii(root->left,leftview);
             // att right la 
             print_leftview_ii(root->right,leftview);
         }
+        */
+
+void print_rightview(node *root,int level,vector<int> &rightview){
+    
+    if(root==NULL){
+        return ;
+    }
+
+    if(level==rightview.size()){
+        rightview.push_back(root->data);
+    }
+
+//    etha apan pahile right la view karto tyananter leftla 
+
+        print_rightview(root->right,level+1,rightview);
+        print_rightview(root->left,level+1,rightview);
+    }
+
+// the implimentation of top viewof a tree 
+
+void print_topview(node *n1 )
+{   
+    map<int ,int > hd_to_node;
+    queue<pair<node*,int>> q;
+    q.push(make_pair(n1,0));
+
+    while (!q.empty())
+    {
+       pair<node*,int> temp=q.front();
+       q.pop();
+
+       node* frontnd=temp.first;
+       int hd=temp.second;
+
+       if(hd_to_node.find(hd)==hd_to_node.end()){
+            hd_to_node[hd]=frontnd->data;
+       }
+
+        //    atta same left la jaycha nanter rigth
+
+        if(frontnd->left !=NULL){
+            q.push(make_pair(frontnd->left,hd-1));
+        }
+        if(frontnd->right !=NULL){
+            q.push(make_pair(frontnd->right,hd+1));
+        }
 
     }
+
+    for(auto i : hd_to_node){
+        cout<<i.second<<" ";
+    }
+    
 }
 int main(){
 
@@ -283,11 +335,65 @@ int main(){
     // }
 
     // method ii
-    vector<int> leftview;
-    print_leftview_ii(n1,leftview);
+    // vector<int> leftview;
+    // print_leftview_ii(n1,leftview);
 
-    for(auto i : leftview){
-        cout<<(i)<<" ";
-    }
+    // for(auto i : leftview){
+    //     cout<<(i)<<" ";
+    // }
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------
+    
+    // vector<int> rightview;
+    // print_rightview(n1,0,rightview);
+
+    // for(auto i : rightview){
+    //     cout<<(i)<<" ";
+    // }
+    
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+    
+    // top view  
+// 1
+// 2
+// 3
+// -1
+// -1
+// 4
+// -1
+// -1
+// 9
+// -1
+// 10
+// -1
+// -1
+    print_topview(n1);  
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return 0;
 }
