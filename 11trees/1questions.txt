@@ -1,7 +1,7 @@
 1. height of a tree https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
 2. diameter of a tree https://leetcode.com/problems/diameter-of-binary-tree/
 3. balanced trees https://leetcode.com/problems/balanced-binary-tree/description/
-4. lowest comman ancestor of a tree 
+4. lowest comman ancestor of a tree https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 5. pathsum I    https://leetcode.com/problems/path-sum/
 6. pathsum II
 7. K-th ancestor from the target node 
