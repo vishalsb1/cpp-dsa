@@ -76,10 +76,30 @@ void Level_ordered_traversal(Node *n1){
         }
     }
 }
+bool search_bst(Node *root ,int target){
+    if(root==NULL){
+        return false;
+    }
+
+    if(root->data== target){
+        return true;
+    }
+
+    if(root->data > target){
+       return search_bst(root->left,target);
+    }
+    else{
+       return search_bst(root->right,target);
+    }
+}
 int main(){
     Node *root=NULL;
     create_Bstree(root);
     // 10 20 5 11 17 2 4 8 6 25 15 
 
-    Level_ordered_traversal(root);
+    // Level_ordered_traversal(root);
+
+    cout<<(search_bst(root,15));
+    // jar 1 ala tr samjaycha true ahai mnje ki element present a 
+    // or false mnje elemnt nhi mnje 0
 }
