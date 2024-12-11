@@ -16,3 +16,7 @@ questions
 11.the right view of a tree
 13.the top view of the tree
 14. printing  the boundary of the tree.
+15. diagonal traversal 
+16. vertical traversal 
+17. zig zag traversal
+18. transform to sum tree

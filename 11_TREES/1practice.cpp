@@ -34,6 +34,7 @@ node* createtree(){
     
     return temp;
 }
+
 // traversals 
 
 void preorder(node *n1){
@@ -83,12 +84,14 @@ void bfs_traversal(node * n1){
 
 }
 
+// same a varchyagat bas kt hyat null add karto apan te view changlla disnya sathi 
+
 void level_traversal(node *n1){
     queue<node*> q;
     q.push(n1);
     q.push(NULL);
 
-    // here teo conditiond occcurs 
+    // here two conditiond occcurs 
     while(!q.empty()){
         node * temp=q.front();
         q.pop();
