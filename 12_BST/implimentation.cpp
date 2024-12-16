@@ -92,14 +92,85 @@ bool search_bst(Node *root ,int target){
        return search_bst(root->right,target);
     }
 }
+
+int largest_node(Node *n){
+    if(!n){
+        return 0; 
+    }
+    if(n->right == NULL){
+        return n->data;
+    }
+    if(n->right!=NULL){
+        return largest_node(n->right);
+    }
+    return 0;
+}
+// iterative method
+int largest_iterative(Node* root){
+    if(!root) return 0;
+    if(root->right==NULL) return root->data;
+    while(root!=NULL){
+        Node * ans=root->right;
+        if(ans->right==NULL){
+            return ans->data;
+        }
+        root=root->right;
+    }
+    return 0;
+}
+int smallest_iteration(Node* root){
+    if(!root) return 0;
+    if(root->left==NULL) return root->data;
+    while(root!=NULL){
+        Node * ans=root->left;
+        if(ans->left==NULL){
+            return ans->data;
+        }
+        root=root->left;
+    }
+    return 0;
+}
+int smallest_node(Node *n){
+
+    if(!n){
+        return 0; 
+    }
+    if(n->left == NULL){
+        return n->data;
+    }
+    if(n->left!=NULL){
+        return smallest_node(n->left);
+    }
+    return 2;
+}
+
+Node * Delete_Node(Node * n, int target){
+
+    if(!n) return NULL;
+
+    if(!n->left && !n->right){
+        return NULL;
+    }
+    else if(n->left==NULL && !n->right){
+        Node* temp=n->right;
+        delete n;
+        
+    }
+}
 int main(){
     Node *root=NULL;
     create_Bstree(root);
     // 10 20 5 11 17 2 4 8 6 25 15 
+    // 10 20 5 11 17 2 4 8 6 25 15 94 74 101 47 22 25 8 1 37
 
     // Level_ordered_traversal(root);
 
-    cout<<(search_bst(root,15));
+    // cout<<(search_bst(root,15));
     // jar 1 ala tr samjaycha true ahai mnje ki element present a 
     // or false mnje elemnt nhi mnje 0
+
+    // ---------largest node
+    cout<<largest_iterative(root)<<endl;
+    // ---------smallest node
+    cout<<smallest_iteration(root)<<endl;
 }
