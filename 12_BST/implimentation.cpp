@@ -144,20 +144,6 @@ int smallest_node(Node *n){
     return 2;
 }
 
-Node * Delete_Node(Node * n, int target){
-
-    if(!n) return NULL;
-
-    if(!n->left && !n->right){
-        return NULL;
-    }
-    else if(n->left==NULL && !n->right){
-        Node* temp=n->right;
-        delete n;
-        
-    }
-}
-
 Node* deleteNodeInBST(Node* root, int target) {
 	
 	//base cae
@@ -186,7 +172,7 @@ Node* deleteNodeInBST(Node* root, int target) {
 		else {
 			//both child
 			//find inorder predecessor inb left subtree
-			int inorderPre = maxVal(root->left);
+			int inorderPre = largest_iterative(root->left);
 			//replace root->data value with inorder predecessor
 			root->data = inorderPre;
 			//delete inorder predecessor from left subtree
@@ -206,9 +192,60 @@ Node* deleteNodeInBST(Node* root, int target) {
 	}
 	return root;
 }
+
+bool validate_bst(Node *root){
+    if(!root)return true;
+
+    if(root->left->data < root->data || root->left ==NULL){
+        return true;
+    }else return false;
+    if(root->right->data > root->data || root->right ==NULL){
+        return true;
+    }else return false;
+    bool left_ans=validate_bst(root->left);
+    bool right_ans=validate_bst(root->right);
+
+    return left_ans || right_ans;
+}
+
+void Bst_to_Dll(Node * root,Node* &head){
+    if(!root) return;
+
+    Bst_to_Dll(root->right,head);
+    root->right=head;
+    if(head!=NULL) head->left=root;
+    head=root;
+    Bst_to_Dll(root->left,head);
+}
+
+void print_ll(Node* head){
+
+    Node * temp= head;
+
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->right;
+    }
+    cout<<endl;
+}
+Node* Dll_to_Bst(Node* &head,int n){
+    if(n<=0 || head==NULL) return NULL ;
+
+    Node* left_ans=Dll_to_Bst(head,n-1-n/2);
+
+    Node* root= head;
+    
+    root->left=left_ans;
+    head=head->right;
+
+    root->right=Dll_to_Bst(head,n/2);
+
+    return root;
+}
 int main(){
     Node *root=NULL;
     create_Bstree(root);
+    Level_ordered_traversal(root);
     // 10 20 5 11 17 2 4 8 6 25 15 
     // 10 20 5 11 17 2 4 8 6 25 15 94 74 101 47 22 25 8 1 37
 
@@ -219,7 +256,18 @@ int main(){
     // or false mnje elemnt nhi mnje 0
 
     // ---------largest node
-    cout<<largest_iterative(root)<<endl;
-    // ---------smallest node
-    cout<<smallest_iteration(root)<<endl;
+    // cout<<largest_iterative(root)<<endl;
+    // // ---------smallest node
+    // cout<<smallest_iteration(root)<<endl;
+
+    //cout<<validate_bst(root)<<endl;
+
+   //    converting to bst
+
+   Node *head=NULL;
+   Bst_to_Dll(root,head);
+   print_ll(head);
+
+   root=Dll_to_Bst(head,11);
+   Level_ordered_traversal(root);
 }
