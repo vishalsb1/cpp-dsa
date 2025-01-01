@@ -242,6 +242,33 @@ Node* Dll_to_Bst(Node* &head,int n){
 
     return root;
 }
+// -------------------------inorder predecssor---
+int find_inorder_predecessor(Node * root,int target){
+    Node *temp=root;
+    Node* current
+    // first find if node present 
+    
+    while(!temp->right and !temp->left){
+        if(temp->data==target){
+            ans=true;
+            break;
+        }
+        else if (target > temp->data){
+            temp=temp->right;
+        }
+        else if(target < temp->data){
+            temp=temp->left;
+        }
+
+    }
+
+    if(temp->right==NULL and temp->left==NULL){
+
+    }
+
+    
+    
+}
 int main(){
     Node *root=NULL;
     create_Bstree(root);
@@ -264,10 +291,15 @@ int main(){
 
    //    converting to bst
 
-   Node *head=NULL;
-   Bst_to_Dll(root,head);
-   print_ll(head);
+//    Node *head=NULL;
+//    Bst_to_Dll(root,head);
+//    print_ll(head);
 
-   root=Dll_to_Bst(head,11);
-   Level_ordered_traversal(root);
+//    root=Dll_to_Bst(head,11);
+//    Level_ordered_traversal(root);
+      
+    //   -------------------------- the inorder predecessor------
+
+    int ans=find_inorder_predecessor(root,target);
+    cout<<ans<endl;
 }
