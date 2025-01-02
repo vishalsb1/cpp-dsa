@@ -54,6 +54,9 @@ vector<int> MergeKSortedArr(vector<vector<int>>arr,int row, int col){
 }
 // 2
 // lik to the next question = https://leetcode.com/problems/merge-k-sorted-lists/submissions/1494213701/
+
+// 3
+// link to the third question-> https://leetcode.com/submissions/detail/1494318585/
 int main(){
     
     vector<vector<int>> var={{2,3,4,5},{7,8,10,12},{13,55,90,95}};
