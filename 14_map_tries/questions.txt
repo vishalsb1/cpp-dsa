@@ -1,0 +1,74 @@
+Starting build...
+/usr/bin/g++ -fdiagnostics-color=always -g /workspaces/cpp-dsa/14_map&tries/map/implimentation_map.cpp -o /workspaces/cpp-dsa/14_map&tries/map/implimentation_map
+/bin/sh: 1: tries/map/implimentation_map.cpp: not found
+/bin/sh: 1: tries/map/implimentation_map: not found
+g++: error: /workspaces/cpp-dsa/14_map: No such file or directory
+g++: fatal error: no input files
+compilation terminated.
+Build finished with error(s).
+ *  The terminal process failed to launch (exit code: -1). 
+ *  Terminal will be reused by tasks, press any key to close it.  how can isolve ts errorEditThis error is occurring because of the ampersand (&) in your file path. The ampersand is a special character in shell commands that puts processes in the background, which is causing the path to be misinterpreted.
+Here's how to fix it:
+
+Either rename your directory from "map&tries" to "map_tries" or "mapAndTries" (remove the &)
+OR if you want to keep the & in the directory name, you need to escape it in the path by either:
+
+Using quotes around the path
+Using a backslash before the &
+
+
+
+Here's what you can do:
+
+The safest solution - rename the directory:
+
+bashCopy# Rename the directory
+mv "14_map&tries" "14_map_tries"
+
+Or update your launch.json configuration to use escaped paths. You can modify it to:
+
+jsonCopy{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Your other configuration settings...
+      "program": "${workspaceFolder}/14_map_tries/map/implimentation_map"  // Use underscores instead
+    }
+  ]
+}
+The simpler solution is to avoid using special characters like & in directory and file names. I recommend using underscores (_) or camelCase naming conventions instead, as they're more widely supported and less likely to cause issues with command-line tools and build systems. CopyRetryClaude does not have the ability to run the code it generates yet.Vi have replaced the& to _ but what was the reson to remove it (&) ??EditThe & character needed to be removed because it has a special meaning in command line interfaces and shell scripting. Here's why:
+
+In Unix/Linux shells (like bash), & is used as a control operator that tells the shell to run a command in the background. For example:
+
+bashCopycommand1 & command2   # This runs command1 in background and command2 immediately after
+
+When you had "map&tries" in your path, the shell interpreted it like this:
+
+It saw: /workspaces/cpp-dsa/14_map&tries/...
+It understood this as: "run /workspaces/cpp-dsa/14_map in the background AND THEN run tries/..."
+This obviously wasn't what you wanted - you meant & as part of the directory name
+
+
+Other special characters that should generally be avoided in file/directory names:
+
+Space ( )
+Ampersand (&)
+Hash (#)
+Asterisk (*)
+Exclamation mark (!)
+Question mark (?)
+Pipe (|)
+Quotes (' and ")
+Less than/greater than (< >)
+
+
+
+This is why developers typically use:
+
+Underscores (_)
+Hyphens (-)
+camelCase
+PascalCase
+
+
+-------------------------------------------------questions-------------------------------------------------
