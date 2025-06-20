@@ -83,7 +83,7 @@ public:
     }
 };
 
-// trapping water question
+// trapping water question (yz question)
 
 class Solution {
 public:
@@ -117,7 +117,57 @@ public:
     }
 };
 
-// Sum of subarray minimum
+// Sum of subarray minimum (yz question)
+class Solution {
+public:
+    vector<int>find_nse(vector<int>&arr){
+        int n=arr.size();
+        stack<int>st;
+        vector<int>nse(n,0);
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && arr[st.top()]>=arr[i]){
+                st.pop();
+            }
+            if(st.empty()) nse[i]=n;
+            else nse[i]=st.top();
+            st.push(i);
+        }
+        return nse;
+    }
+
+    vector<int>find_pse(vector<int>&arr){
+        int n=arr.size();
+        stack<int>st;
+        vector<int>nse(n,0);
+        for(int i=0;i<n;i++){
+            while(!st.empty() && arr[st.top()]>arr[i]){
+                st.pop();
+            }
+            if(st.empty()) nse[i]=-1;
+            else nse[i]=st.top();
+            st.push(i);
+        }
+        return nse;
+    }
+
+    int sumSubarrayMins(vector<int>& arr) {
+        vector<int> nse=find_nse(arr);
+        vector<int> pse=find_pse(arr);
+
+        int sum=0;
+        int mod=1e9+7;
+
+        for(int i=0;i<arr.size();i++){
+            int left=i-nse[i];
+            int right=pse[i]-i;
+
+            sum=(sum+(right*left*1LL*arr[i])%mod)%mod;
+        }
+
+        return sum;
+    }
+};
+
 // Asteroid Collision
 // Sum of subarray ranges
 // Remove k Digits
