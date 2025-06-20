@@ -169,6 +169,52 @@ public:
 };
 
 // Asteroid Collision
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> st;
+        
+        for(int i = 0; i < asteroids.size(); i++) {
+            bool destroyed = false;
+            
+            if(asteroids[i] > 0) {
+                // Positive asteroid - moving right, just add to stack
+                st.push(asteroids[i]);
+            } else {
+                // Negative asteroid - moving left, check for collisions
+                while(!st.empty() && st.top() > 0 && !destroyed) {
+                    if(abs(asteroids[i]) > st.top()) {
+                        // Current asteroid destroys the one in stack
+                        st.pop();
+                    } else if(abs(asteroids[i]) == st.top()) {
+                        // Both asteroids destroy each other
+                        st.pop();
+                        destroyed = true;
+                    } else {
+                        // Current asteroid gets destroyed
+                        destroyed = true;
+                    }
+                }
+                
+                // If current asteroid survived, add it to stack
+                if(!destroyed) {
+                    st.push(asteroids[i]);
+                }
+            }
+        }
+        
+        // Convert stack to result vector
+        vector<int> result;
+        while(!st.empty()) {
+            result.push_back(st.top());
+            st.pop();
+        }
+        
+        // Reverse to get correct order
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
 // Sum of subarray ranges
 // Remove k Digits
 // Largest rectangle in a histogram
