@@ -96,4 +96,74 @@ public:
     }
 };
 
-// 
+// 4th 904. Fruit Into Baskets
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int l=0,r=0;
+        map<int,int> mp;
+        int max_len=INT_MIN;
+
+
+// brute force
+        // for(int i=0;i<fruits.size();i++){
+        //     set<int> st;
+        //     for(int j=i;j<fruits.size();j++){
+        //         st.insert(fruits[j]);
+        //         if(st.size()<=2){
+        //             max_len=max(max_len,j-i+1);
+        //         }else break;
+        //     }
+        // }
+        // return max_len;
+
+
+// better solution 
+        // while(r<fruits.size()){
+
+        //     mp[fruits[r]]++;
+
+        //     if(mp.size()>2){
+        //         while(mp.size()>2){
+        //             mp[fruits[l]]--;
+        //             if(mp[fruits[l]]==0){
+        //                 mp.erase(fruits[l]);
+        //             }
+        //             l++;
+        //         }
+                
+        //     }
+        //     if(mp.size()<=2){
+        //         max_len=max(max_len,r-l+1);
+        //     }
+        //     r++;
+        // }
+
+        // return max_len;
+
+
+// optimal solution 
+        while(r<fruits.size()){
+
+            mp[fruits[r]]++;
+
+            if(mp.size()>2){
+
+                mp[fruits[l]]--;
+
+                if(mp[fruits[l]]==0){
+                    mp.erase(fruits[l]);
+                }
+
+                l++;
+                
+            }
+            if(mp.size()<=2){
+                max_len=max(max_len,r-l+1);
+            }
+            r++;
+        }
+
+        return max_len;
+    }
+};
