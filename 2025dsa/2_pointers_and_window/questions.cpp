@@ -167,3 +167,97 @@ public:
         return max_len;
     }
 };
+
+
+// 6th Longest Substring with K Uniques
+
+// User function template for C++
+
+class Solution {
+  public:
+    int longestKSubstr(string &s, int k) {
+        // your code here
+        
+        // its same as fruits inbasket problem
+        
+        int l=0,r=0;
+        int max_len=0;
+        map<char,int> mp;
+        
+        while(r<s.size()){
+            // adding element that are on r
+            mp[s[r]]++;
+            
+            // if size is greatere than k then the given is not following the given rule thus 
+            if(mp.size()>k){
+                // as its dont follows remove the l'th element (reduce count)
+                mp[s[l]]--;
+                // is the count reduces to 0 that means no requirent of that eement for now 
+                if(mp[s[l]]==0){
+                    mp.erase(s[l]);
+                }
+                // iterate l as that element is not needed 
+                l++;
+            }
+            // if the map or the string contains the <= k elements that upate max_length is max
+            if(mp.size()<=k){
+                max_len=max(max_len,r-l+1);
+            }
+            // for iteration array ,tring
+            r++;
+        }
+        
+        // is the map or basket (string )doesnt  contains < than k elements than return -1
+        if(mp.size()<k){
+            return -1;
+        }
+        return max_len;
+    }
+};
+
+// 7th 1358. Number of Substrings Containing All Three Characters
+
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        int last_seen[3]={-1,-1,-1};
+        int count=0;
+
+        for(int i=0;i<s.size();i++){
+            last_seen[s[i]-'a']=i;
+
+            if(last_seen[0]!=-1&& last_seen[1]!=-1 && last_seen[2]!=-1){
+                count=count+(1+min(last_seen[0],min(last_seen[1],last_seen[2])));
+            }
+        }
+        return count;
+    }
+};
+
+// 8th 424. Longest Repeating Character Replacement
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        
+        int l=0,r=0,max_fre=0,max_len=0;
+        int hash[26]={0};
+        
+        while(r<s.length()){
+
+            hash[s[r]-'A']++;
+            max_fre=max(max_fre,hash[s[r]-'A']);
+
+            if((r-l+1)-max_fre >k){
+                hash[s[l]-'A']--;
+                l++;
+            }
+
+            if((r-l+1)-max_fre <= k){
+                max_len=max(max_len,r-l+1);
+            }
+            r++;
+        }
+        return max_len;
+    }
+};
