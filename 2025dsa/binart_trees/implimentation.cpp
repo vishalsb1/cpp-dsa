@@ -51,10 +51,28 @@ void Level_ordered_traversal(Node *root){
         }
     }
 }
+void iterative_preorder(Node* root){
+    stack<Node*> st;
+    st.push(root);
+
+    while(!st.empty()){
+        Node* temp=st.top();
+        st.pop();
+
+        cout<<temp->data;
+        if(temp->right!=NULL){
+            st.push(temp->right);
+        }
+        if(temp->left!=NULL){
+            st.push(temp->left);
+        }
+    }
+}
 int main(){
     Node *n1=create_tree();
     cout<<n1->data;
-    Level_ordered_traversal(n1);
+    // Level_ordered_traversal(n1);
+    iterative_preorder(n1);
     return 0;
 
 }
