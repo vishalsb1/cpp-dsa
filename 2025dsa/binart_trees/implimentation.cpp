@@ -12,7 +12,7 @@ class Node{
         this->right=NULL;
         this->left=NULL;
      }
-}
+};
 Node *create_tree(){
     int data;
     cin>>data;
@@ -20,7 +20,8 @@ Node *create_tree(){
     if(data==-1){
         return NULL;
     }
-    node *newnode=new node(data);
+
+    Node *newnode=new Node(data);
 
     // left la create karaycha
     newnode->left=create_tree();
@@ -31,9 +32,29 @@ Node *create_tree(){
     return newnode;
 
 }
+void Level_ordered_traversal(Node *root){
+    queue<Node*> q;
+    q.push(root);
+
+
+    while(!q.empty()){
+        Node* temp=q.front();
+        q.pop();
+
+        cout<<temp->data<<" ";
+
+        if(temp->left!=NULL){
+            q.push(temp->left);
+        }
+        if(temp->right!=NULL){
+            q.push(temp->right);
+        }
+    }
+}
 int main(){
     Node *n1=create_tree();
     cout<<n1->data;
+    Level_ordered_traversal(n1);
     return 0;
 
 }
