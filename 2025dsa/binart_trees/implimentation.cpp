@@ -67,6 +67,39 @@ void iterative_preorder(Node* root){
             st.push(temp->left);
         }
     }
+
+}
+void Level_ordered_traversal(node *n1){
+    queue<node*> q;
+    q.push(n1);
+    q.push(NULL);
+
+
+    while(!q.empty()){
+        
+        node* temp=q.front();
+        q.pop();
+
+        if( temp==NULL){
+            cout<<endl;
+            if(!q.empty()){
+                // jar hi condition nhi lehili tar infinite loop madi adakto apan 
+                q.push(NULL);
+            }
+        }
+        else{
+
+            cout<<temp->data<<" ";
+
+            if(temp->left!=NULL){
+                q.push(temp->left);
+            }
+            
+            if(temp->right!=NULL){
+                q.push(temp->right);
+            }
+        }
+    }
 }
 int main(){
     Node *n1=create_tree();
